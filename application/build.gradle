@@ -1,0 +1,56 @@
+configureBuild(project,
+		['java', 'spring-boot', 'dependencies', 'publish', 'cf', 'concourse', 'postman'],
+		[ 'main': [
+				'group': 'com.ford.nitro',
+				'projectName': 'csdn-neutral-server',
+				'version': gitShortVersion()
+		]
+		])
+
+buildscript {
+	ext {
+		springBootVersion = '2.2.3.BUILD-SNAPSHOT'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "http://www.nexus.ford.com/repository/external-proxy-group/" }
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.spring.dependency-management'
+
+
+repositories {
+    maven { url "http://www.nexus.ford.com/repository/external-proxy-group/" }
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('org.springframework.boot:spring-boot-devtools')
+	compileOnly('org.projectlombok:lombok')
+	annotationProcessor('org.projectlombok:lombok')
+	providedRuntime('org.springframework.boot:spring-boot-starter-ford-proxy')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+

@@ -1,0 +1,4 @@
+buildscript {
+    apply from: "../../csdn-build-deploy/gradle/bootstrap.gradle"
+    configureBuildScript it
+}
