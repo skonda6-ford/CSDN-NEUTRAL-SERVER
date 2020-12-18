@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
     "axios": "^0.19.1",
-    "dompurify": "^2.0.7",
+    "dompurify": "^2.0.17",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
